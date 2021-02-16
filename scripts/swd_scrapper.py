@@ -75,7 +75,7 @@ def get_swd(instructor_data, resave=True):
     instructor_data = pd.read_csv(instructor_data)
     instructor_data = get_creds(instructor_data)
     if resave:
-        instructor_data.to_csv("../csvs/instructors.csv")
+        instructor_data.to_csv("../csvs/data_extracted.csv")
 
     return instructor_data
 
