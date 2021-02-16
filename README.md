@@ -14,6 +14,7 @@ A Selenium based scraper for student info in BITS Pilani, Goa Campus
 python swd_scrapper.py <filename>
 ```
 - If there is a file called `data.csv` in the `csvs` folder then mentioning the filename is optional.
+- SWD Website mandates the entry of username and password. Hence enter the username and password when prompted.
 
 2. Instructions for the source file:
 - The source file contains the names and IDs of the students whose names are to be extracted.
