@@ -1,0 +1,99 @@
+import selenium
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.firefox.options import Options
+from tqdm import tqdm
+import time
+import pandas as pd
+import logging
+import getpass
+import sys
+
+
+def get_creds(instructor_data):
+    """
+        Helper function that recursively scrapes data
+        Args:
+            instructor_data : pd.DataFrame of the instructor_data
+        Returns:
+            instructor_data : modified data
+    """
+    ids = instructor_data["Id"]
+    names = instructor_data["Name"]
+
+    for i in tqdm(range(len(ids))):
+        
+        try:
+            id_button = driver.find_elements_by_xpath('//*[@id="bitsId"]')
+            id_button[0].send_keys(ids[i] + Keys.ENTER)
+            time.sleep(1)
+            name_swd = driver.find_element_by_css_selector('.centered > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(3)').get_attribute('innerHTML')
+        
+            if name_swd.lower() != names[i].lower():
+                logging.info("Changed {} to {}".format(names[i], name_swd))
+                names[i] = name_swd.title()
+        except Exception as err:
+            print("{} occured for while searching the id {}".format(err, names[i]))
+
+    return instructor_data
+        
+def get_swd(instructor_data, resave=True):
+
+    """
+        A function to scrap the names of the Instructors and mentors
+        from the swd website.
+        Args:
+        -----
+            instructor_data = csv file containing the instructor data
+            resave = (bool, default = True) flag to resave the data scrapped from swd website
+        Returns:
+        -------
+            instructor_data : modified dataframe 
+    """
+    print("Scrapping in progress")
+    print("Inorder to search names, the new SWD mandates login. Hence your username and password are required.")
+    
+    username_in = str(input("Enter your username(case-sensitive)"))
+    password_in = str(getpass.getpass("Enter your password(case-sensitive)"))
+    
+    driver.get("https://swd.bits-goa.ac.in/search/")
+
+    # After you get the website, you have to enter your credentials to login
+    username = driver.find_element_by_name("username")
+    password = driver.find_element_by_name("password")
+    username.send_keys(username_in)
+    password.send_keys(password_in)
+    login = driver.find_element_by_xpath("/html/body/div[1]/div/div[2]/form/button/span")
+    login.submit()
+
+    time.sleep(2)
+    # Click Search bar to go for searches
+    search = driver.find_element_by_xpath('/html/body/nav/div[2]/ul/li[9]/a')
+    search.click()
+
+    # Recursively get names
+    instructor_data = pd.read_csv(instructor_data)
+    instructor_data = get_creds(instructor_data)
+    if resave:
+        instructor_data.to_csv("../csvs/instructors.csv")
+
+    return instructor_data
+
+if __name__ == "__main__":
+
+    # Taking in arguments
+    if len(sys.argv) == 2:
+        file_name = sys.argv[1]
+    else:
+        file_name = "../csvs/data.csv"
+    # Logger
+    logging.basicConfig(level=logging.INFO, filename="../logs/scrapper.log", filemode='w', format='%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
+
+    # Scrapper info
+    options = Options()
+    options.add_argument("--disable-infobars")
+    options.set_headless()
+    driver = webdriver.Firefox(executable_path="geckodriver", options=options)
+
+    data = get_swd(file_name, True)
+    
