@@ -3,8 +3,8 @@ A Selenium based scraper for student info in BITS Pilani, Goa Campus
 
 ## Requirements
 macOS:
-1. [Firefox] (https://www.mozilla.org/en-US/firefox/new/)
-2. [Python] (https://www.python.org/downloads/)
+1. [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+2. [Python](https://www.python.org/downloads/)
 3. Run the below code
 ```
 python -m pip install -r requirements.txt
@@ -12,17 +12,17 @@ python -m pip install -r requirements.txt
 xattr -r -d com.apple.quarantine geckodriver
 ```
 Linux:
-1. [Firefox] (https://www.mozilla.org/en-US/firefox/new/)
-2. [Python] (https://www.python.org/downloads/)
+1. [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+2. [Python](https://www.python.org/downloads/)
 3. Run the below code
 ```
 python -m pip install -r requirements.txt
 ./geckodriver-install.sh
 ```
 Windows:
-1. [Firefox] (https://www.mozilla.org/en-US/firefox/new/)
-2. [Python] (https://www.python.org/downloads/)
-3. [Geckodriver] (https://github.com/mozilla/geckodriver/releases)
+1. [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+2. [Python](https://www.python.org/downloads/)
+3. [Geckodriver](https://github.com/mozilla/geckodriver/releases)
 4. Run the below code
 ```
 python -m pip install -r requirements.txt
