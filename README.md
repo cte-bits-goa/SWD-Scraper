@@ -2,6 +2,9 @@
 A Selenium based scraper for student info in BITS Pilani, Goa Campus
 
 ## Requirements
+If you have only python 3 installed try
+```python``` instead of ```python3```
+
 macOS:
 1. [Firefox](https://www.mozilla.org/en-US/firefox/new/)
 2. [Python 3](https://www.python.org/downloads/)
