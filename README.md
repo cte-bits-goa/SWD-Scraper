@@ -2,11 +2,31 @@
 A Selenium based scraper for student info in BITS Pilani, Goa Campus
 
 ## Requirements
-1. Python 2.7 and above.
-2. Selenium
-3. Pandas
-4. tqdm
-5. logging
+macOS:
+1. [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+2. [Python](https://www.python.org/downloads/)
+3. Run the below code
+```
+python -m pip install -r requirements.txt
+./geckodriver-install.sh
+xattr -r -d com.apple.quarantine geckodriver
+```
+Linux:
+1. [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+2. [Python](https://www.python.org/downloads/)
+3. Run the below code
+```
+python -m pip install -r requirements.txt
+./geckodriver-install.sh
+```
+Windows:
+1. [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+2. [Python](https://www.python.org/downloads/)
+3. [Geckodriver](https://github.com/mozilla/geckodriver/releases)
+4. Run the below code
+```
+python -m pip install -r requirements.txt
+```
 
 ## Instructions
 1. The main scrapper can be run as follows
